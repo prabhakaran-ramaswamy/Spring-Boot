@@ -13,7 +13,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-    baseName = 'gs-spring-boot'
+    baseName = 'spring-boot'
     version =  '0.1.0'
 }
 
@@ -29,13 +29,22 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
+	compile("org.thymeleaf:thymeleaf-spring4")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
     compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
+	
+	compile ('org.apache.httpcomponents:httpmime:4.3.5')
+	
     // end::actuator[]
     testCompile("junit:junit")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+bootRepackage {
+    mainClass = 'com.sample.Application'
 }
 
 task wrapper(type: Wrapper) {
